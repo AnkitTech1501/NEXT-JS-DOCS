@@ -1,0 +1,125 @@
+****************************CALL BACK *******************
+
+CALLBACK MATLAB EK FUNCTION MAI DUSARA FUNCTION CALL KARNA WITH THE HELP OF ARGUMENT,VAH DUSARA FUNCTION CALL BACK HAI ,  ISKA PURPOSE YEH HIAI main function run hone KE BAAD call back chalega 
+
+E.G number print karao aur then multply karo , main function mai print karenge aur another function jo second function use hua use hum multiply mai use hoga 
+
+call back function flexible hai 
+
+e.g 
+
+function calculator(a, b, operation) { 
+    console.log(a,b);
+    operation(a, b);
+}
+
+function add(x, y) {
+  console.log(x + y);
+}
+
+calculator(5, 3, add);
+
+abh flexible samjho kal ke date mai multply karu toh sirf mujhe multiple ka functin banana padega aur kuch nhi main function mai koi code changes nhi hoga , agar normal function hota tph hume code bhi changes karna padega 
+
+callback function multiply
+
+function calculator(a, b, operation) {
+    console.log(a,b);
+    operation(a, b);
+}
+
+function multiple (x, y) {
+  console.log(x * y);
+}
+
+calculator(5, 3, multiple);
+
+
+normal function 
+
+
+function calculator(a,b){
+    console.log(x+y);
+}
+
+kal ke date mai mujhe multiplication karna hoga mujhe function ke andar code change karna hoga 
+
+function calculator(a,b){
+    console.log(a*b);
+}
+
+********callback aur bhi tarah se hum bana saklte hai ***********
+function hello(callback) {
+    callback();
+}
+
+hello(function () {
+    console.log("hello");
+});
+
+/***************CALL BACK HELL ******************
+
+Jab callbacks ke andar callbacks ke andar callbacks aajaye
+Code bahut nested ho jata hai.
+
+Simple Example
+
+Maan lo tumhe ye kaam order me karne hain:
+
+Login
+User Data
+Posts
+Comments
+
+Har next step previous step ke complete hone ke baad chalega.
+
+function login(callback) {
+  console.log("Login done");
+
+  callback();
+}
+
+function getUser(callback) {
+  console.log("User data fetched");
+
+  callback();
+}
+
+function getPosts(callback) {
+  console.log("Posts fetched");
+
+  callback();
+}
+
+function getComments(callback) {
+  console.log("Comments fetched");
+
+  callback();
+}
+
+/// caling ///  
+
+login(function () {
+
+  getUser(function () {
+
+    getPosts(function () {
+
+      getComments(function () {
+
+        console.log("All work completed");
+
+      });
+
+    });
+
+  });
+
+});
+
+toh isme issue hai nested bahut hai aur difficault hota hia debugging karna isme login ke baad get user chalega user milne ke baad post chalegs mutlab har function ke dusare pai dependent hai.
+
+IS CALL BACK HELL KO READABLE AUR EASY SAMJNE KE LIYE HUM PROMISE USE KARTE HAI 
+
+**************PROMISES*******************
+

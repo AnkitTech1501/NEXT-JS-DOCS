@@ -1,0 +1,132 @@
+Next.js me useRouter navigation ke liye use hota hai.
+
+Matlab:
+
+ek page se dusre page par jaana
+back jaana
+current route access karna
+
+Mostly App Router me:
+
+import { useRouter } from "next/navigation";
+
+"use client";
+
+import { useRouter } from "next/navigation";
+
+export default function Home() {
+  const router = useRouter();
+
+  return (
+    <button onClick={() => router.push("/about")}>
+      Go to About
+    </button>
+  );
+}
+
+Button click → /about page open.
+
+Important:
+
+useRouter client component me hi use hota hai.
+
+Isliye:
+
+"use client";
+
+jaroori hota hai.
+
+********Common methods:*************
+
+router.push()	New page par le jaata
+router.replace()	Replace karta history
+router.back()	Browser back
+router.forward()	Forward
+router.refresh()	Page/data refresh
+
+1) push() 
+
+router.push("/contact");
+
+History maintain hoti hai.
+
+Back kar sakte ho.
+
+2) back()
+
+router.back();
+
+Browser back button jaisa.
+
+***********Dynamic route example: ***********
+
+router.push(`/product/${id}`);
+
+Agar id = 5
+
+Toh route:
+
+/product/5
+
+************ form submit example ***************
+
+"use client";
+
+import { useRouter } from "next/navigation";
+
+export default function Login() {
+  const router = useRouter();
+
+  const handleLogin = () => {
+    router.push("/dashboard");
+  };
+
+  return <button onClick={handleLogin}>Login</button>;
+}
+
+abh yaad aata hai link bhi use ho sakta hai 
+magar dhyan rakhna link sirf simple navigatiopn ke liye hota hai , dono hi navigation ke liye use hota hai chalo differece samate hai 
+
+Link	            useRouter
+JSX/component hai	Hook hai
+Simple navigation	Dynamic/programmatic navigation
+Button/link click	Logic ke baad redirect
+SEO friendly	    Mostly actions ke liye
+
+link prefetch karta hai iske vajkah instant navigation aur performance fast raheta hai 
+
+Prefetch matlab Next.js pehle se next page ka code/background data silently load kar leta hai before user click kare.
+
+Isse navigation bahut fast lagta hai.
+
+Example:
+
+<Link href="/about">About</Link>
+
+Jab ye link screen par aata hai:
+
+Next.js background me /about page ka JS/code load kar sakta hai
+User click karega toh instantly page open ho jayega\
+
+flow samjho jab app normal url hit kate ho toh next js ssr rendering concept use karta hai means server html diya aur saath mai next js + 1 js file deta vah browser ko use file mai react runtime, router aur hydration rehta hai vah broswer ko lag sake , then aqap inside vah html aap link usekar rahe ho dusare url ko dikhane ke liye toh react router pahele se ui update kar deta hai background mai isliye jab link pai click karte ho toh ui update hota hai aur url phir show karta hai isliye yeh itna fast hai ..
+
+
+
+Agar disable karna ho:
+
+<Link href="/about" prefetch={false}>
+  About
+</Link>
+
+
+*****************Kab useRouter use kare? aur isko programmatically navigation **************
+
+Agar pehle kuch logic chalana ho:
+
+const handleSubmit = async () => {
+  await login();
+
+  router.push("/dashboard");
+};
+
+Yaha direct Link use nahi kar sakte

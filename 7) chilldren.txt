@@ -1,0 +1,64 @@
+children mtlab component ke content 
+
+react mai jab bhi hum kuch content pass karte hai component mai aur us content ko hum access karte hai with the help of children 
+
+children ek react ka special props hai jo help karta hai content lene mai 
+
+e.g
+
+<Box> <h1>hello</h1> </Box>
+
+component 
+
+export default function Box({children}){
+    retrurn (<div>children</div>);
+}
+
+aur abh dekhoge na jab render hga ui then ais dikhega 
+
+<div><h1>hello</h1></div>
+
+
+next js mai children mtlab current page for routing and normal tojh component ke content 
+
+e.g 
+
+mostly children layout mai rehta hai aur component mai , aur provider mai 
+
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>
+        <h1>Navbar</h1>
+
+        {children}
+
+        <h1>Footer</h1>
+      </body>
+    </html>
+  );
+}
+
+isme dekho jiska content change nhi rehta hai vah aise hi rehta hai
+
+children isme current page hai 
+
+samjho aapne about banaya then uske content appko children through muilenge as 
+
+about/page.tsx
+
+export default function hello(){
+    return <h1>hello</h1>
+}
+
+layout.jsx 
+
+mai likha hai 
+<html>
+<h1>navbar </h1>
+<h1>hello</h1> -- idhar visible hoga jab aap output dekhoge 
+
+
+
+
+

@@ -1,0 +1,418 @@
+********* Components creation ***********
+1) create a component 
+sabse pahele tsx mtlab jsx+typescript 
+
+
+component mtlab list of ui code aur uske reuse kar sake.
+
+create a component kaise karoge 
+
+app\Components\Button.tsx
+
+code : 
+
+export default function Button(){
+    return (
+        <button>Click Me</button>
+    )
+}
+
+inside page.tsx 
+import {Button} from ./Components/Button; ---(./ --- current file location).
+
+return (
+    <Button />
+)
+
+page.tsx main file hai..
+
+paramter using props keyword passing data to components..
+
+same file 
+
+export default function Button(props){
+    return (
+        <button> {props.name} </button>
+    )
+}
+
+in page.tsx
+import Button from './components/Button';
+export default function Home(){
+    return (
+        <Button name = "Click Me" />
+    )
+}
+
+agar multiple unknow parameter pass karoge toh error aayega kyuki vahi properties call nhi kiya components
+
+***** mulitple properties ******
+
+export default function Button(props){
+    return (
+        <button id={props.id}>{props.name}</button>
+    )
+}
+
+in page.tsx 
+
+import Button from './Components/Button';
+export default function(){
+    <Button id = "btn" name = "Clicked Me">
+}
+
+
+******** Multiple components**********
+1) app\components\Button.jsx
+2) app\Components\UserCard.jsx
+
+
+same as Button aur UserCard  -----(**** ek cheez yaad rakhna component name hamesha Pascal case letter mai rahega means button - Button, usercard -- UserCard)
+
+import karo page.tsx 
+
+page.tsx 
+
+import Button from './components/Button'
+import UserCard from './components/UserCard'
+ 
+export default function Home(){
+    return (<Button />)   *** ERROR IN JSX ONE PARENT ELEMENT ****
+}
+--- idhar appko ek aur error dega in jsx ek main parent hona chahiye ------
+
+****** Correct Way *****
+
+export default function Home(){
+    return (<div>
+        <Button />
+        <UserCard /
+    </div>)
+}
+
+
+***** without using props*****
+
+export default function Button({name,title}){
+    <button name = {name}>{title} </button>
+}
+
+
+******* agar multiple components ek hi line mai likhna hoga then *****
+
+sabse pagele jaha components banaye hue vah apko index.js bana padega
+open index.js
+
+export { default as Button } from "./Buttons";
+export { default as UserCard } from "./UserCard";
+
+
+call karo page.tsx mai 
+
+import {Button, UserCard} from './Components.' --- multiple components ek line mai..
+
+******* hum tailwind css bhi use kar sakte han *****
+in app\components\Button
+
+export default function Button({ name }) {
+  return (
+    <button className="bg-blue-500 text-white px-4 py-2 rounded">
+      {name}
+    </button>
+  );
+} 
+
+***** NESTED Components *****
+
+ek comnponents ke andar multiple components use kar sakte hai***
+
+ek navbar mai maine button aur UserCard component call kiya aur navbar component maine page.tsx mai call kiya hu 
+
+in app\components\Navbar 
+
+code : 
+import Button from "./Buttons";
+import UserCard from "./UserCard";
+export default function Navbar() {
+  return (
+    <nav className="bg-gray-800 text-white p-4">
+      <div className="container mx-auto">
+        <h1 className="text-xl font-bold">My App</h1>
+        <Button name="Click Me" />
+        <UserCard name="John Doe" email="john.doe@example.com" />
+      </div>
+    </nav>
+  );
+}
+
+page .tsx 
+
+import Navbar from './Components/'
+export default function Home(){
+    return (
+        <Navbar />
+    )
+}
+
+isko bi same index.js mai kar saktev ho agar mulitple components import karna hai ek hi line mai 
+in index.js 
+
+export { default as Button } from "./Buttons";
+export { default as UserCard } from "./UserCard";
+export { default as Navbar } from "./Navbar";
+
+call in page.tsx
+
+import { Button, UserCard,Navbar } from "./Components";
+
+****** PROP DRILLING CONCEPT *****
+samjo hamare pass nested componets hai  component 1 > component 2 > compoent 3 
+
+abh data chahiye component 3 from component 1 
+
+toh hame dsata pass component 2 mai bhi karna padega kyuki component2 parent hai componet 3 mtlab agar component 2 ko bhi need nhi hai phir bhi hum pass kar rahe hai isko bolte hai prop drilling concept 
+
+e.g 
+
+page.tsx > NavBar > Sidebar > List.jsx 
+abh humhe data chahiye list.jsx mai chahiye let see 
+
+app\components\Navbar.jsx
+import { Button, UserCard,SideBar } from "./index";
+export default function Navbar() {
+  return (
+    <nav className="bg-gray-800 text-white p-4">
+      <div className="container mx-auto">
+        <h1 className="text-xl font-bold">My App</h1>
+        <Button name="Click Me" />
+        <UserCard name="John Doe" email="john.doe@example.com" />
+        <SideBar item1="Item 1" item2="Item 2" item3="Item 3" />
+      </div>
+    </nav>
+  );
+}
+
+app\components\SideBar.jsx
+import List from "./List";
+export default function SideBar(props) {
+    return (
+        <div className="w-64 bg-gray-200 p-4">
+           
+            <List item1={props.item1} item2={props.item2} item3={props.item3} />
+        </div>
+    );
+}
+
+app\components\List.jsx
+export default function List(props) {
+    return (
+        <div className="w-full bg-gray-100 p-4">
+            <h2 className="text-xl font-bold mb-4">List</h2>
+            <ul>
+                <li className="mb-2">{props.item1}</li>
+                <li className="mb-2">{props.item2}</li>
+                <li className="mb-2">{props.item3}</li>
+            </ul>
+        </div>
+    );
+}   
+
+
+and sabse pahele aapko export karna hoga index.js for multiple component import in single line
+in index.js 
+
+export { default as Button } from "./Buttons";
+export { default as UserCard } from "./UserCard";
+export { default as Navbar } from "./Navbar";
+export { default as SideBar } from "./SideBar";
+
+in page.tsx import karo navbar 
+ 
+import NavBar from './components'
+
+abh baar baar data pass karna annoying lagta hai toh context api concept use kar sakte hai 
+*******************CONTEXT API******************
+
+React ka Context API prop drilling problem solve karta hai.
+
+Matlab:
+
+Data ko directly kisi bhi component me access kar sakte ho without manually props pass karna.
+
+CONTEXT API --- Globally DATA STORE 
+
+CONTEXT API MAI 3 CHEEX BAHUT IOMPORTANT HOTA HAI 
+
+createContext === context create karna 
+Provider  === data provide karna 
+useContext === Data use karna 
+
+
+sabse pahele context banao -- with the help of context -- createContext global container banata hai iski vajah sab components data access kar sakte hain agar yeh use nh karoge toh provider not nwork dont know kunse container mai provider use karna hai 
+
+sidhi baat -- global container - inside provider -- access data -- each child components 
+
+1) create app\context\UserContext.tsx
+code : 
+
+"use client";
+
+import { createContext } from "react";
+
+export const UserContext = createContext("");
+
+2) Provider lagao 
+
+app\layout.tsx
+
+"use client";
+
+import { UserContext } from "./context/UserContext";
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html>
+      <body>
+        <UserContext.Provider value="Ankit">
+          {children}
+        </UserContext.Provider>
+      </body>
+    </html>
+  );
+}
+
+agar multiple value pass karna hai toh object se kar sakte ho 
+
+<UserContext.Provider
+  value={{
+    name: "Ankit",
+    age: 25,
+  }}
+>
+
+3. Data use karna hoga 
+app/components/Profile.tsx 
+"use client";
+
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
+
+export default function Profile() {
+  const user = useContext(UserContext);
+
+  return <h1>{user}</h1>;
+}
+
+for multiple value access 
+
+return <h1>{user.name}</h1>
+
+isme error aayega metadata ka kyuki 
+
+const metadat access hota hai server side rendering mtlab aur humne use klkiya hai "use client" mtlab client side rendering ye phir hme const metadat = {} ko aisa karna padega otherwise naya provider banake uysko layouyt mai access kar sakte hai
+
+4 : create karte hai new providers
+
+app\providers\UserProvider.tsx         
+code : 
+
+"use client";
+
+import { UserContext } from "../context/UserContext";
+
+export default function UserProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <UserContext.Provider value="Ankit">
+      {children}
+    </UserContext.Provider>
+  );
+}
+
+5 : layout.tsx 
+
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+
+import UserProvider from "./providers/UserProvider";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "Create Next App",
+  description: "Generated by create next app",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable}`}
+    >
+      <body>
+        <UserProvider>
+          {children}
+        </UserProvider>
+      </body>
+    </html>
+  );
+}
+
+Rule yaad rakho
+
+Agar file me:
+
+useState
+useEffect
+useContext
+onClick
+
+hai → "use client" required.
+
+app router mai jitne bhi folder files hai vah sabh server side hai .
+layout.tsx --- server side component 
+
+UserProvider.tsx  ---- client component 
+
+simple sa context api 
+
+create karo createContext se
+phir provider create karo 
+with the help of conext aur provider mai data save pass karo 
+
+then use karo useContext apne component mai 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

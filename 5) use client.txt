@@ -1,0 +1,31 @@
+"use client" Next.js ko batata hai:
+
+“Is component ka JavaScript browser me bhejo aur hydrate karo.”
+
+Without "use client":
+
+component sirf server par run hota hai
+browser me React JS attach hota par usk componen ka js code nhi hoa
+hydration nahi hoti for that component
+
+With "use client":
+
+"use client"
+→ sirf us component ka JS browser bundle me add hota hai
+→ React runtime already browser me hota hai
+→ phir hydration + interactivity hoti hai
+
+
+react run time kab aaya hai, jab request jaate hai server ko server html + next js + 1 js file bhejta hai is js mai 
+react runtime, next js router aur hydration logic likha rehta hai ..
+
+
+
+
+without use client hamhe error aayega agaar humne use kiya "use state","use context","web api","click", kyuki component server side banke aate hai aur js attach nhi hiota isliye error ata hai .
+
+Cek cheez yadd rakhna jab neXt js start hota hai toh react runtime load hiota hai jo broswer par exist kart hai iska mtlab navigation, routing ke liye use hota hai withoutusing "use client"
+
+
+
+

@@ -1,0 +1,41 @@
+installing next js 
+
+npx create-next-app@latest
+
+then for development 
+
+npm run dev
+
+automatically server start 
+
+
+if you directly used npm run start 
+
+then error comes because you have to make build file 
+
+npm run build (-- for production) 
+
+then npm start 
+localhost server makes 
+
+difference between 
+npm run build and npm run dev 
+
+****** npm run dev ******
+
+development purpose ke liye ,
+slow in performance 
+not optimized 
+hot reload feature deta hai 
+
+
+*****npm run build ****
+
+production ke liye hota hai , build file create karta hai with the help of .next 
+yeh pure js, css ko ek file mai rakhta hai aur optimized banata hai 
+isme hot reload nhi hai featre 
+
+aur jo bhi change kar rahe ho aapko npm run build marna padega evey time then npm run start karna padega 
+
+
+

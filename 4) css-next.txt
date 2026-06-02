@@ -1,0 +1,104 @@
+1) Normal css 
+
+style.css
+
+.box {
+  background: red;
+  color: white;
+  padding: 20px;
+}
+
+page.tsx aur kahi bhi component mai use kar sakte ho 
+
+import "./styles.css";
+
+export default function Home() {
+  return (
+    <div className="box">
+      Hello
+    </div>
+  );
+}
+
+2) CSS Modules 
+
+Scoped CSS. 
+
+file.module.css 
+
+for e.g agar yeh css apko use karn hai about page ke liye then 
+about.module.css
+
+.box{
+    background : green;
+}
+
+aur about.jsx mai use kar sakte ho 
+
+import styles from './about.module.css'
+export default function About() {
+  return (
+    <button className={styles.btn}>
+      Click
+    </button>
+  );
+}
+tailwinf ke badd yeh jyad use mai hai 
+
+isse css clash nhio hota aur conflict nhi aata 
+
+samjho same css tumhe alag alagpage mai rakhna then issue hoga kyuki sabh jagah same css lagega isil
+jisko jis page pai alag css chahiye toh uske liye uska module css bana do
+
+module css unique css properties banata hai isliye css clash nhi hota 
+about.module.css
+.box {
+  background: blue;
+}
+
+Internally:
+
+.box__x9y8z
+.box
+.box
+.box
+
+Conflict possible.
+
+CSS Module
+.box__123
+.box__456
+.box__789
+
+
+Real Folder Structure
+components/
+ ├── Button.tsx
+ ├── Button.module.css
+ │
+ ├── Card.tsx
+ └── Card.module.css
+
+
+3) npm install bootstrap 
+
+import "bootstrap/dist/css/bootstrap.min.css"; in layout.tsx
+you can use anywhre bootstrap class 
+
+4) styled-components
+css inside js
+
+npm install styled-components
+
+in button.jsx
+
+import styled from "styled-components";
+
+const Button = styled.button`
+  background: red;
+  color: white;
+`;
+
+export default function Home() {
+  return <Button>Click</Button>;
+}

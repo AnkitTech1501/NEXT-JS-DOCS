@@ -1,0 +1,317 @@
+1) react js 
+<div id ="root"></div>
+first this part load 
+
+then js download  after that react run  afer than api call then ui render 
+
+it means that in react, js first load after than html load , so it indicates system slow 
+
+it is csr - client side rendering 
+
+seo weak in react js , intial loading takes time and also content is not visible to search engine tjhats why seo is weak in react js, for routing in react js we use react router dom package and everything we have to do manually in react js so it is complex 
+
+2) Next js 
+react framework, NEXT JS is a react framework which is used for server side rendering and static site generation AND ALSO PROVIDE DEFAULT ROUTING SYSTEM, INITIAL LOADING FAST 
+
+A) SSR - SERVER SIDE RENDERING
+Browser → Request -> Server → Ready HTML(js, reactjs ,ui render) → nextjs + bundle of js ->BROWSER
+bundle of js - react runtime, nex js routing and hydration
+
+SEO is good in next js because content is visible to search engine and also intial loading is fast because of server side rendering
+
+SSR actually kya karta hai
+1) React component server pe run karta hai
+
+Example:
+
+function Home() {
+  return <h1>Products</h1>;
+}
+
+Server isko convert karta hai:
+
+<h1>Products</h1>
+2) Data fetch server pe hota hai
+Database/API call server pe hoti hai
+
+Browser ko wait nahi karna padta.
+
+3) SEO improve karta hai
+
+Google bot ko milta hai:
+
+<h1>Best Shoes</h1>
+<p>Buy Nike shoes online</p>
+
+Isliye ranking better hoti hai.
+
+4) Fast initial load
+
+User ko instantly page dikh jata hai.
+
+No loading blank screen
+
+5) REAL TIME DATA MILTA HAI JAB BHI REQUEST KARTA HAI BROWSER
+
+
+
+
+SSR page server se ready aata hai,
+Hydration us page ko React ke through interactive banata hai.
+
+
+B) Hydration kya hota hai?
+
+Hydration = already rendered HTML ko React ke through interactive banana
+Simple flow
+1) SSR - SERVER SIDE RENDERING
+Server → <h1>Hello</h1> send karta hai
+
+Browser me page dikh gaya ✔️
+
+BUT:
+
+button click work nahi karta
+state active nahi hoti
+2) Hydration step
+
+Browser me React load hota hai (MEANS REACT JS DOWNLOAD HOTA HAI):
+
+React JS → same component dobara match karta hai HTML ke saath
+
+Phir:
+
+event listeners attach hote hain
+useState active hota hai
+page interactive ban jata hai
+Example samjho
+SSR output:
+<button>Click me</button>
+
+Is time button bas dikh raha hai.
+
+Hydration ke baad:
+React button pe onClick attach karta hai
+
+Ab:
+✔ click work karega
+✔ state change hoga
+✔ UI update hoga
+
+C) SSG - Static Site Generation
+SSG simple meaning
+Page pehle se bana ke rakhna
+Example
+
+Maan lo tumhari website pe:
+
+/about page hai.
+
+Normal React mai kya hota User page open karta: Browser → JS load → React page banata
+Tab page dikhta.
+
+SSG mai kya hota
+Build time pe hi: Next.js page ko HTML me convert karke save kar deta kaha karta hai save server par okay
+
+Example:
+<h1>About Us</h1>
+already ready hota.
+
+Jab user request karta /about
+toh server:
+ready-made HTML file bhej deta
+Kuch banana nahi padta.
+
+Real life analogy
+SSR
+Customer aaya → tab khana banao
+SSG
+Khana pehle se bana ke rakha hai
+Customer aaya → direct serve
+
+Isliye SSG:
+✔ bahut fast
+
+Important point
+
+SSG mai:
+
+HTML pehle se generate hota hai
+
+Kab?
+
+npm run build
+
+ke time.
+
+Simple diagram
+BUILD TIME:
+React page
+   ↓
+HTML file ban gayi
+
+USER REQUEST:
+Ready HTML send
+Hydration yaha bhi hota
+
+Browser:
+
+React JS load karta
+
+phir:
+
+button work
+state work
+interactivity
+
+start hoti.
+
+Ek line mai
+SSG = Page ko pehle se HTML me bana ke rakhna
+
+D) ISR (INCREMENTAL STATIC REGENERATION)
+
+ISR kya hota hai?
+
+ISR = Static page ko automatic update karna
+Pehle SSG samjho
+
+SSG mai:
+
+Page ek baar build hota
+
+Example:
+
+Product price = ₹100
+
+HTML save ho gaya.
+
+Problem
+
+Baad mai price:
+
+₹120
+
+ho gaya.
+
+Lekin user ko:
+
+abhi bhi ₹100
+
+dikhega.
+
+Kyuki static page old hai.
+
+ISR kya karta hai
+
+ISR bolta:
+
+Thodi der baad page automatically update kar do
+Example
+
+Tum bolte: (TUM SET KAR SAKTE HO TIME (REVALIDATE : 60))
+
+Har 60 sec baad update check karo
+Flow
+1. User ko fast static page milta
+          ↓
+2. 60 sec complete
+          ↓
+3. Next.js background me naya HTML banata
+          ↓
+4. Old page replace ho jata
+User ko kya benefit
+
+✔ Fast page
+✔ Fresh data bhi milta rahega
+
+
+****** WORKFLOW OF CSR,SSR,SSG******
+
+1) CSR - Client Side Rendering
+
+User Request
+      ↓
+Browser gets almost empty HTML
+      ↓
+JS files download
+      ↓
+React runs in browser
+      ↓
+API calls happen
+      ↓
+HTML/UI generated in browser
+      ↓
+Page becomes interactive
+
+2) SSR - Server Side Rendering
+
+User Request
+      ↓
+Server runs React components
+      ↓
+Server fetches data
+      ↓
+Server generates HTML
+      ↓
+Ready HTML sent to browser
+      ↓
+JS files download
+      ↓
+Hydration happens
+      ↓
+Page becomes interactive
+     ↓
+Browser
+
+3) SSG - Static Site Generation
+
+BUILD TIME:
+
+React components
+      ↓
+Static HTML files generated
+      ↓
+Files stored
+
+REQUEST TIME:
+User Request
+      ↓
+Ready HTML file sent
+      ↓
+Browser shows page instantly
+      ↓
+JS files download
+      ↓
+Hydration happens
+      ↓
+Page becomes interactive
+
+4) ISR - Incremental Static Regeneration
+
+Build time pe static HTML generate
+            ↓
+User ko ready HTML milta
+            ↓
+Revalidate time complete
+            ↓
+Next request pe background me new page generate
+            ↓
+New HTML replace old HTML
+
+
+*********Ab React browser me kaise aata hai ********
+
+Yaha confusion hota hai 👇
+
+👉 Next.js ke saath ek JS file bhi browser ko milti hai
+
+Is file me hota hai:
+
+React runtime (React ka engine)
+Next.js router
+hydration logic
+
+
+
+
