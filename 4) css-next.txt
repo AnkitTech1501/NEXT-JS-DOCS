@@ -1,6 +1,6 @@
 1) Normal css 
 
-style.css
+style.css   ---easy
 
 .box {
   background: red;
