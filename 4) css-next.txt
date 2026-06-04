@@ -1,11 +1,11 @@
 1) Normal css 
 
-style.css   ---easy1235656
+style.css   ---easy123
 
 .box {
   background: red;
   color: white;
-  padding: 20px;
+  padding: 20px;  --test
 }
 
 page.tsx aur kahi bhi component mai use kar sakte ho 
